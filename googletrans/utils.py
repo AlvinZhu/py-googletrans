@@ -49,6 +49,7 @@ def format_json(original):
             text = text[:p] + states[j][1] + text[nxt:]
 
     converted = json.loads(text)
+    # print(json.dumps(converted, indent=4, sort_keys=True))
     return converted
 
 

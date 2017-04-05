@@ -128,7 +128,7 @@ class Translator(object):
         # actual source language that will be recognized by Google Translator when the
         # src passed is equal to auto.
         try:
-            src = data[-1][0][0]
+            src = data[2]
         except Exception:  # pragma: nocover
             pass
 
@@ -202,8 +202,8 @@ class Translator(object):
         src = ''
         confidence = 0.0
         try:
-            src = ''.join(data[8][0])
-            confidence = data[8][-2][0]
+            src = ''.join(data[2])
+            confidence = data[6]
         except Exception:  # pragma: nocover
             pass
         result = Detected(lang=src, confidence=confidence)
