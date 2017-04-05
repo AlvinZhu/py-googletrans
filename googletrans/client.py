@@ -134,7 +134,7 @@ class Translator(object):
 
         pron = origin
         try:
-            pron = data[0][1][-1]
+            pron = data[0][-1][-1]
         except Exception:  # pragma: nocover
             pass
         if not PY3 and isinstance(pron, unicode) and isinstance(origin, str):  # pragma: nocover
