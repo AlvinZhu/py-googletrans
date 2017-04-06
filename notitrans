@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+text="$(xsel -o | tr "\n" " ")"
+notify-send --icon=info "$text" "$(translate -d zh-CN -t "$text")"
+

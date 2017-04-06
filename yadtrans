@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+text="$(xsel -o | tr "\n" " ")"
+translate -d zh-CN "$text" | yad --title="Translate" --width=450 --height=300 --center --text-info --wrap
