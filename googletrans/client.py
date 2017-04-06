@@ -134,7 +134,7 @@ class Translator(object):
 
         pron = origin
         try:
-            pron = data[0][-1][-1]
+            pron = data[0][-1][2]
         except Exception:  # pragma: nocover
             pass
         if not PY3 and isinstance(pron, unicode) and isinstance(origin, str):  # pragma: nocover
@@ -154,6 +154,30 @@ class Translator(object):
         # put final values into a new Translated object
         result = Translated(src=src, dest=dest, origin=origin,
                             text=translated, pronunciation=pron)
+
+        if len(data) == 15:
+            try:
+                result.dst_def = data[1][0][0] + '\n'
+                for d in data[1][0][2]:
+                    result.dst_def += d[0]
+                    for t in d[1]:
+                        result.dst_def += ',' + t
+                    result.dst_def += '\n'
+
+                result.src_def = ''
+                for d in data[12][0][1]:
+                    result.src_def += d[0] + '\n'
+
+                result.src_pron = data[0][-1][3]
+                if not PY3:
+                    if isinstance(result.dst_def, str):
+                        result.dst_def = result.dst_def.decode('utf-8').strip()
+                    if isinstance(result.src_def, str):
+                        result.src_def = result.src_def.decode('utf-8').strip()
+                    if isinstance(result.src_pron, str):
+                        result.src_pron = result.src_pron.decode('utf-8').strip()
+            except Exception:
+                pass
 
         return result
 

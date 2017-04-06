@@ -13,6 +13,9 @@ class Translated(object):
         self.origin = origin
         self.text = text
         self.pronunciation = pronunciation
+        self.src_pron = None
+        self.src_def = None
+        self.dst_def = None
 
     def __str__(self):  # pragma: nocover
         return self.__unicode__()

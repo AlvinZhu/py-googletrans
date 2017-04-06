@@ -13,19 +13,23 @@ def main():
     parser = argparse.ArgumentParser(
         description='Python Google Translator as a command-line tool')
     parser.add_argument('text', help='The text you want to translate.')
-    parser.add_argument('-d', '--dest', default='en',
-        help='The destination language you want to translate. (Default: en)')
+    parser.add_argument('-d', '--dest', default='zh-CN',
+        help='The destination language you want to translate. (Default: zh-CN)')
     parser.add_argument('-s', '--src', default='auto',
         help='The source language you want to translate. (Default: auto)')
+    parser.add_argument('-u', '--url', default='translate.google.cn',
+                        help='The service URL. (Default: translate.google.cn)')
     parser.add_argument('-c', '--detect', action='store_true', default=False,
         help='')
     parser.add_argument('-t', '--thin', action='store_true', default=False,
                         help='')
     args = parser.parse_args()
 
+    translator.service_urls = [args.url]
+
     if args.detect:
         result = translator.detect(args.text)
-        result = """
+        result = u"""
 [{lang}, {confidence}] {text}
         """.strip().format(text=args.text,
             lang=result.lang, confidence=result.confidence)
@@ -36,12 +40,22 @@ def main():
     if args.thin:
         result = u'{text}'.format(text=result.text).strip()
     else:
-        result = u"""
-[{src}] {original}
-[{dest}] {text}
-[pron.] {pronunciation}
-        """.strip().format(src=result.src, dest=result.dest, original=result.origin,
-                           text=result.text, pronunciation=result.pronunciation)
+        if result.src_pron is not None:
+            result = u"""
+{original} [{src_pron}]\t({src}) 
+{text} [{pronunciation}]\t({dest})
+{dst_def}
+{src_def}""".strip().format(src=result.src, dest=result.dest, original=result.origin,
+                                           text=result.text, pronunciation=result.pronunciation,
+                                           src_pron=result.src_pron, dst_def=result.dst_def,
+                                           src_def=result.src_def)
+        else:
+            result = u"""
+{original}\t({src}) 
+{text}\t({dest})
+[{pronunciation}]
+            """.strip().format(src=result.src, dest=result.dest, original=result.origin,
+                               text=result.text, pronunciation=result.pronunciation)
     print(result)
 
 if __name__ == '__main__':
