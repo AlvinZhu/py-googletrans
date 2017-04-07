@@ -2,5 +2,5 @@
 """
 Predefined URLs used to make google translate requests.
 """
-BASE = 'https://translate.google.com'
+BASE = 'https://translate.google.cn'
 TRANSLATE = 'https://{host}/translate_a/single'

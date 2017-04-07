@@ -10,6 +10,7 @@ import requests
 from googletrans.compat import PY3
 from googletrans.compat import unicode
 from googletrans.utils import rshift
+from googletrans import urls
 
 
 class TokenAcquirer(object):
@@ -53,7 +54,7 @@ class TokenAcquirer(object):
         if self.tkk and int(self.tkk.split('.')[0]) == now:
             return
 
-        r = self.session.get('https://translate.google.com')
+        r = self.session.get(urls.BASE)
         # this will be the same as python code after stripping out a reserved word 'var'
         code = unicode(self.RE_TKK.search(r.text).group(1)).replace('var ', '')
         # unescape special ascii characters such like a \x3d(=)
