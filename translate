@@ -40,7 +40,7 @@ def main():
     if args.thin:
         result = u'{text}'.format(text=result.text).strip()
     else:
-        if result.src_pron is not None:
+        if result.src_pron != "":
             result = u"""
 {original} [{src_pron}]\t({src}) 
 {text} [{pronunciation}]\t({dest})
