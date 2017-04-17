@@ -49,7 +49,7 @@ def install():
             'pytest',
             'coveralls',
         ],
-        scripts=['translate', 'notitrans', 'yadtrans']
+        scripts=['translate', 'notitrans', 'yadtrans', 'zentrans']
     )
 
 

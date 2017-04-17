@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+src_text="$(xsel -o | tr "\n" " ")"
+text="$(translate "$src_text")"
+zenity --title="Translate" --info --text="$text " 2> /dev/null
+
