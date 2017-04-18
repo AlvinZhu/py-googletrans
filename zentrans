@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 src_text="$(xsel -o | tr "\n" " ")"
 text="$(translate "$src_text")"
-translate "$src_text" | zenity --width=450 --height=300 --title="Translate" --text-info --font="Noto Sans CJK SC" 2> /dev/null
+translate "$src_text" | zenity --width=450 --height=300 --title="Translate" --text-info 2> /dev/null
