@@ -3,9 +3,11 @@
 import argparse
 import sys
 from googletrans import Translator
+from googletrans.compat import PY3
 
-reload(sys)
-sys.setdefaultencoding( "utf-8" )
+if not PY3:
+    reload(sys)
+    sys.setdefaultencoding( "utf-8" )
 
 translator = Translator()
 
@@ -51,8 +53,8 @@ def main():
                                            src_def=result.src_def)
         else:
             result = u"""
-{original}\t({src}) 
 {text}\t({dest})
+{original}\t({src}) 
 [{pronunciation}]
             """.strip().format(src=result.src, dest=result.dest, original=result.origin,
                                text=result.text, pronunciation=result.pronunciation)
