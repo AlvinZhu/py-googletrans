@@ -66,6 +66,7 @@ class Translator(object):
         if not PY3 and isinstance(text, str):  # pragma: nocover
             text = text.decode('utf-8')
 
+        text = text.replace("×", "x")
         token = self.token_acquirer.do(text)
         params = utils.build_params(query=text, src=src, dest=dest,
                                     token=token)
